@@ -19,8 +19,7 @@ public class BullsAndCows {
 		numberBuild.subList(0, 6).clear();
 		Scanner in = new Scanner(System.in);
 
-		boolean isGameWon = false;
-		while (!isGameWon) {
+		while (true) {
 			String input = "";
 			do {
 				System.out.println("Enter a number with four unique digits: ");
@@ -29,26 +28,27 @@ public class BullsAndCows {
 
 			String randomNum = numberBuild.stream().map(Object::toString).collect(Collectors.joining(""));
 
-			int bulls = getBulls(input, randomNum, isGameWon, in);
+			int bulls = getBulls(input, randomNum);
 			int cows = getCows(input, randomNum);
 
-			System.out.println(input + " --> " + bulls + " bull(s) and " + cows + " cow(s)");
+			if (bulls != 4) {
+				System.out.println(input + " --> " + bulls + " bull(s) and " + cows + " cow(s)");
+			} else {
+				System.out.println(input + " --> 4 bulls! You win!");
+				in.close();
+				break;
+			}
+
 			bulls = 0;
 			cows = 0;
 		}
 	}
 
-	private static int getBulls(String input, String randomNum, boolean isGameWon, Scanner in) {
+	private static int getBulls(String input, String randomNum) {
 		int bulls = 0;
 		for (int i = 0; i < input.length(); i++) {
 			if (input.charAt(i) == randomNum.charAt(i)) {
 				bulls++;
-			}
-
-			if (bulls == 4) {
-				System.out.println(input + " --> 4 bulls! You win!");
-				in.close();
-				isGameWon = true;
 			}
 		}
 
