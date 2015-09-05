@@ -1,2 +1,2 @@
-# SAP-GeekyCamp
+# SAP GeekyCamp
 Homework tasks @ SAP GeekyCamp
